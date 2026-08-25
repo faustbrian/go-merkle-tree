@@ -2,12 +2,15 @@
 
 ## Unreleased
 
+## 1.0.0 - 2026-08-25
+
 ### Documentation
 
 - Link the package README to the repository-wide Golib documentation portal.
 
 ### Changed
 
+- Publish the module from its standalone `github.com/faustbrian/go-merkle-tree` identity while preserving its documented API and behavior.
 - Link compatibility guidance directly to the canonical specification decision
   register.
 - Pin the RFC 9162 reference corpus and record the security, resource,

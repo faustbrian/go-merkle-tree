@@ -6,7 +6,7 @@ import (
 	"fmt"
 	"testing"
 
-	merkletree "github.com/faustbrian/golib/pkg/merkle-tree"
+	merkletree "github.com/faustbrian/go-merkle-tree"
 	transparencyproof "github.com/transparency-dev/merkle/proof"
 	"github.com/transparency-dev/merkle/rfc6962"
 	"github.com/transparency-dev/merkle/testonly"

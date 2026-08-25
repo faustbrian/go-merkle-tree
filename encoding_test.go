@@ -7,7 +7,7 @@ import (
 	"errors"
 	"testing"
 
-	merkletree "github.com/faustbrian/golib/pkg/merkle-tree"
+	merkletree "github.com/faustbrian/go-merkle-tree"
 )
 
 func TestRootCanonicalBinaryEncodingFixture(t *testing.T) {

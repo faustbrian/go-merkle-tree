@@ -1,4 +1,4 @@
-module github.com/faustbrian/golib/pkg/merkle-tree
+module github.com/faustbrian/go-merkle-tree
 
 go 1.26.6
 

@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "repository": "github.com/faustbrian/go-merkle-tree",
+  "packages": [
+    {
+      "module_directory": ".",
+      "directory": ".",
+      "name": "merkletree",
+      "import_path": "github.com/faustbrian/go-merkle-tree",
+      "kind": "public",
+      "production": true,
+      "executable": true,
+      "coverage_required": true,
+      "build_required": true,
+      "build_tags": []
+    }
+  ]
+}

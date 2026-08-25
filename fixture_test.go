@@ -10,7 +10,7 @@ import (
 	"os"
 	"testing"
 
-	merkletree "github.com/faustbrian/golib/pkg/merkle-tree"
+	merkletree "github.com/faustbrian/go-merkle-tree"
 )
 
 const rfc9162FixtureChecksum = "1ee115281c3a1861ef9e92e126e1f2bf7e043bc0ce4ada8b83a9d54d4ab885c7"

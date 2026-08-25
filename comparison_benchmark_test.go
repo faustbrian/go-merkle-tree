@@ -8,7 +8,7 @@ import (
 	"testing"
 
 	cbergoon "github.com/cbergoon/merkletree"
-	merkletree "github.com/faustbrian/golib/pkg/merkle-tree"
+	merkletree "github.com/faustbrian/go-merkle-tree"
 	transparencyrfc6962 "github.com/transparency-dev/merkle/rfc6962"
 	transparencytest "github.com/transparency-dev/merkle/testonly"
 	txaty "github.com/txaty/go-merkletree"

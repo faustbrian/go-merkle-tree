@@ -1,7 +1,17 @@
 # merkle-tree
 
+[![CI](https://github.com/faustbrian/go-merkle-tree/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/faustbrian/go-merkle-tree/actions/workflows/ci.yml)
+[![CodeQL](https://img.shields.io/badge/CodeQL-required-blue)](https://github.com/faustbrian/go-merkle-tree/actions/workflows/ci.yml)
+[![Coverage](https://img.shields.io/badge/coverage-100%25_required-blue)](CONTRIBUTING.md#verification)
+[![Mutation](https://img.shields.io/badge/mutation-100%25_required-blue)](CONTRIBUTING.md#verification)
+[![Documentation](https://img.shields.io/badge/docs-checked_in_CI-blue)](docs/)
+[![Go Reference](https://pkg.go.dev/badge/github.com/faustbrian/go-merkle-tree.svg)](https://pkg.go.dev/github.com/faustbrian/go-merkle-tree)
+[![Release](https://img.shields.io/github/v/release/faustbrian/go-merkle-tree?sort=semver)](https://github.com/faustbrian/go-merkle-tree/releases)
+[![Go](https://img.shields.io/badge/go-1.26.6-00ADD8?logo=go)](https://go.dev/)
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+
 `merkle-tree` is a storage-independent cryptographic data-structure library
-for explicitly profiled, ordered Merkle trees. The current pre-v1 surface
+for explicitly profiled, ordered Merkle trees. The stable v1 surface
 constructs and streams bounded roots, incrementally appends leaves, creates
 immutable snapshots, generates inclusion, multi-inclusion, and consistency
 proofs, and independently verifies them for the package canonical binary
@@ -247,7 +257,7 @@ they retain different stable identities. The canonical profile is
 package-owned. The RFC profile is an interoperability claim limited to the
 Merkle Tree Hash behavior implemented and tested here.
 
-## Current pre-v1 boundary
+## Current v1 boundary
 
 Batch and streaming root construction, atomic append and batch append,
 immutable snapshots, and inclusion, multi-inclusion, and consistency proofs

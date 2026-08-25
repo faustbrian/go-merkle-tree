@@ -14,7 +14,7 @@ Build `merkle-tree` as a production-grade open source Go library for creating,
 updating, persisting, proving, and verifying cryptographic Merkle trees.
 
 The module path MUST be
-`github.com/faustbrian/golib/pkg/merkle-tree`. The root package identifier
+`github.com/faustbrian/go-merkle-tree`. The root package identifier
 MUST be `merkletree`. Go support MUST follow the repository-wide minimum
 toolchain policy.
 
