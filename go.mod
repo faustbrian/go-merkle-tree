@@ -3,7 +3,7 @@ module github.com/faustbrian/go-merkle-tree
 go 1.26.6
 
 require (
-	github.com/cbergoon/merkletree v0.2.0
+	github.com/cbergoon/merkletree v0.5.0
 	github.com/transparency-dev/merkle v0.0.2
 	github.com/txaty/go-merkletree v0.2.2
 	github.com/wealdtech/go-merkletree/v2 v2.6.1
