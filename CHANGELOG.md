@@ -2,6 +2,17 @@
 
 ## Unreleased
 
+### Changed
+
+- Replace copied repository-local verification tooling with the released,
+  checksum-pinned `go-library-tools` v1.0.5 workflow and CLI while preserving
+  the package's source-owned conformance, benchmark, and mutation evidence.
+
+### Documentation
+
+- Replace archived monorepo links and completed execution artifacts with a
+  standalone, human-oriented documentation structure.
+
 ## 1.0.0 - 2026-08-25
 
 ### Changed
@@ -25,7 +36,7 @@
 
 ### Documentation
 
-- Link the package README to the repository-wide Golib documentation portal.
+- Link the package README to package-owned documentation.
 
 ### Changed
 
