@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+### Changed
+
+- Replace copied repository-local verification tooling with the released,
+  checksum-pinned `go-library-tools` v1.0.5 workflow and CLI while preserving
+  the package's source-owned conformance, benchmark, and mutation evidence.
+
 ### Documentation
 
 - Replace archived monorepo links and completed execution artifacts with a
