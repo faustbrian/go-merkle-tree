@@ -5,8 +5,29 @@
 ### Changed
 
 - Replace copied repository-local verification tooling with the released,
-  checksum-pinned `go-library-tools` v1.0.13 workflow and CLI while preserving
-  the package's source-owned conformance, benchmark, and mutation evidence.
+  checksum-pinned `go-library-tools` v1.0.14 CLI and the immutable
+  `0bbff11f25d74203018019fa5b26ae1443310fe7` workflow while preserving the
+  package's source-owned conformance, benchmark, and mutation evidence.
+
+### Added
+
+- Add machine-enforced RFC 9162 source and errata monitoring, decision and
+  conformance records, preserved decision history, change control, and
+  maintained-peer differential classifications. See the
+  [specification decision register](docs/specification-decisions.md).
+
+### Specification Decisions
+
+- MERKLETREE-DEC-001 sha256:fa3421258576aa3899d8782dd7e304111f5df49a99991077bf56607d145987b5
+- MERKLETREE-DEC-002 sha256:5f24b34120614a05f9dad87961f65941c6317fc1bfe48d06fd9b854e0b7fcb5d
+- MERKLETREE-DEC-003 sha256:4488606b3445e521712b3b60287623c05640f1cfdee6deac982138eaa1b14783
+- MERKLETREE-DEC-004 sha256:7a474513e24c5867ac652498f3c058e4604341757afeb96f2b171f88a3afb0f6
+- MERKLETREE-DEC-005 sha256:21d7a3ea1e852de9a13d45af0fbbc2e2e49e58b5db8399de7ab6d3e016f5d3d6
+- MERKLETREE-DEC-006 sha256:861a972c86744474044c13a11d0fceb16019d9e687b2b6d65e380410bc9590f5
+- MERKLETREE-DEC-007 sha256:ab62348a7244890d5a98b2d52286fa531e722799c35af86918fa99c97c33ed90
+- MERKLETREE-DEC-008 sha256:858f53d0d73d548035a0464028cea2d192aefa560df297a7c28e066c934d8895
+- MERKLETREE-DEC-009 sha256:43717310bf90946ab65f19048c1d0c534d0e034cd3d3af1a456006e6c0eae4eb
+- MERKLETREE-DEC-010 sha256:fe09d5afe9f074364a5c999dcf5b778756de8d22c4094bfa5e2e01ebbd39e4c6
 
 ### Documentation
 

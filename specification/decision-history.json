@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "entries": [
+    {
+      "id": "MERKLETREE-DEC-001",
+      "digests": [
+        "fa3421258576aa3899d8782dd7e304111f5df49a99991077bf56607d145987b5"
+      ]
+    },
+    {
+      "id": "MERKLETREE-DEC-002",
+      "digests": [
+        "5f24b34120614a05f9dad87961f65941c6317fc1bfe48d06fd9b854e0b7fcb5d"
+      ]
+    },
+    {
+      "id": "MERKLETREE-DEC-003",
+      "digests": [
+        "4488606b3445e521712b3b60287623c05640f1cfdee6deac982138eaa1b14783"
+      ]
+    },
+    {
+      "id": "MERKLETREE-DEC-004",
+      "digests": [
+        "7a474513e24c5867ac652498f3c058e4604341757afeb96f2b171f88a3afb0f6"
+      ]
+    },
+    {
+      "id": "MERKLETREE-DEC-005",
+      "digests": [
+        "21d7a3ea1e852de9a13d45af0fbbc2e2e49e58b5db8399de7ab6d3e016f5d3d6"
+      ]
+    },
+    {
+      "id": "MERKLETREE-DEC-006",
+      "digests": [
+        "861a972c86744474044c13a11d0fceb16019d9e687b2b6d65e380410bc9590f5"
+      ]
+    },
+    {
+      "id": "MERKLETREE-DEC-007",
+      "digests": [
+        "ab62348a7244890d5a98b2d52286fa531e722799c35af86918fa99c97c33ed90"
+      ]
+    },
+    {
+      "id": "MERKLETREE-DEC-008",
+      "digests": [
+        "858f53d0d73d548035a0464028cea2d192aefa560df297a7c28e066c934d8895"
+      ]
+    },
+    {
+      "id": "MERKLETREE-DEC-009",
+      "digests": [
+        "43717310bf90946ab65f19048c1d0c534d0e034cd3d3af1a456006e6c0eae4eb"
+      ]
+    },
+    {
+      "id": "MERKLETREE-DEC-010",
+      "digests": [
+        "fe09d5afe9f074364a5c999dcf5b778756de8d22c4094bfa5e2e01ebbd39e4c6"
+      ]
+    }
+  ]
+}
