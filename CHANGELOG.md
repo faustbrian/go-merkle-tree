@@ -5,8 +5,8 @@
 ### Changed
 
 - Replace copied repository-local verification tooling with the released,
-  checksum-pinned `go-library-tools` v1.0.14 CLI and the immutable
-  `0bbff11f25d74203018019fa5b26ae1443310fe7` workflow while preserving the
+  checksum-pinned `go-library-tools` v1.2.0 CLI and the immutable
+  `1f9629e5f27418600460b55a50a5b2fc81697fab` workflow while preserving the
   package's source-owned conformance, benchmark, and mutation evidence.
 
 ### Added
