@@ -63,6 +63,8 @@ streaming root computation with logarithmic retained state.
 Use the [documentation index](docs/README.md) for profiles, proof semantics,
 security, compatibility, and operations. The [detailed reference](docs/reference.md)
 contains the complete builder, proof, specification, and v1 boundary notes.
+Observable RFC interpretations and package policies are maintained in the
+[specification decision register](docs/specification-decisions.md).
 
 ## Development
 

@@ -24,7 +24,7 @@ tooling; package-specific commands belong in `verification/` and must remain
 declared as typed operations in that configuration.
 
 Specification-backed changes must follow the
-[specification governance contract](AGENTS.md#design), update
+[specification decision register](docs/specification-decisions.md), update
 the affected stable decision entries, and complete the Specification Decisions
 section of the pull request template. An unresolved interpretation or stale
 source pin is release-blocking; peer behavior cannot silently select policy.

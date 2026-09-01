@@ -1,0 +1,259 @@
+{
+  "schema_version": 1,
+  "decisions": [
+    {
+      "id": "MERKLETREE-DEC-001",
+      "authoritative_sources": [
+        "rfc9162-source"
+      ],
+      "executable_evidence": [
+        "TestComputeRootMatchesRFC9162TreeHash",
+        "TestProfilesMakeRootConventionsExplicit",
+        "TestLeafAndDigestBytesNeverAliasCallerMemory",
+        "TestRFC9162MatchesTransparencyDevMerkle"
+      ],
+      "fixtures": [
+        "testdata/rfc9162-sha256-v1.json"
+      ],
+      "fuzz": [
+        "FuzzComputeRoot"
+      ],
+      "differential_evidence": [
+        "differential_test.go"
+      ],
+      "differential_classification": "deliberate policy difference",
+      "public_behavior": [
+        "Both version-1 profiles hash RawLeaf values with the 0x00 prefix and branches with the 0x01 prefix over left and right digests; RawLeaf and Digest remain distinct types."
+      ]
+    },
+    {
+      "id": "MERKLETREE-DEC-002",
+      "authoritative_sources": [
+        "rfc9162-source"
+      ],
+      "executable_evidence": [
+        "TestRFC9162PinnedReferenceFixture",
+        "TestRootCanonicalBinaryEncodingFixture",
+        "TestSnapshotPersistenceEmptyAndRFCProfiles",
+        "TestRFC9162MatchesTransparencyDevMerkle"
+      ],
+      "fixtures": [
+        "testdata/rfc9162-sha256-v1.json"
+      ],
+      "fuzz": [
+        "FuzzComputeRoot",
+        "FuzzParseRoot"
+      ],
+      "differential_evidence": [
+        "differential_test.go"
+      ],
+      "differential_classification": "deliberate policy difference",
+      "public_behavior": [
+        "Both version-1 profiles support an empty tree committed as SHA-256 of the empty string; decoders reject any other zero-size digest."
+      ]
+    },
+    {
+      "id": "MERKLETREE-DEC-003",
+      "authoritative_sources": [
+        "rfc9162-source"
+      ],
+      "executable_evidence": [
+        "TestCanonicalProfileUsesDocumentedRFC9162Shape",
+        "TestRFC9162MatchesTransparencyDevMerkle",
+        "TestBuilderMatchesBatchConstructionForEverySmallPrefixAndProfile"
+      ],
+      "fixtures": [
+        "testdata/rfc9162-sha256-v1.json"
+      ],
+      "fuzz": [
+        "FuzzComputeRoot"
+      ],
+      "differential_evidence": [
+        "differential_test.go"
+      ],
+      "differential_classification": "deliberate policy difference",
+      "public_behavior": [
+        "Preserve caller order and recursively split at the largest power of two smaller than the subtree size without sorting, duplication, promotion, or padding."
+      ]
+    },
+    {
+      "id": "MERKLETREE-DEC-004",
+      "authoritative_sources": [
+        "rfc9162-source"
+      ],
+      "executable_evidence": [
+        "TestProfilesMakeRootConventionsExplicit",
+        "TestProfileValidationRejectsPartiallyMatchingRFCIdentity",
+        "TestInclusionProofBindsOperationIdentityAndOwnsReturnedSlices"
+      ],
+      "fixtures": [
+
+      ],
+      "fuzz": [
+        "FuzzParseRoot"
+      ],
+      "differential_evidence": [
+
+      ],
+      "differential_classification": "not assessed",
+      "public_behavior": [
+        "Every Root binds profile ID, profile version, hash algorithm, tree size, and digest; verification and decoding reject partial or mismatched identities."
+      ]
+    },
+    {
+      "id": "MERKLETREE-DEC-005",
+      "authoritative_sources": [
+        "rfc9162-source"
+      ],
+      "executable_evidence": [
+        "TestRFC9162InclusionProofMatchesIndependentAuditPaths",
+        "TestInclusionProofRejectsWrongLeafAndInvalidRequests",
+        "TestVerifyInclusionRejectsMalformedAndNonVerifyingProofs"
+      ],
+      "fixtures": [
+        "testdata/rfc9162-sha256-v1.json"
+      ],
+      "fuzz": [
+        "FuzzVerifyInclusion",
+        "FuzzParseInclusionProof"
+      ],
+      "differential_evidence": [
+        "differential_test.go"
+      ],
+      "differential_classification": "deliberate policy difference",
+      "public_behavior": [
+        "Store siblings leaf-to-root and require the unique RFC audit-path length; reject missing, surplus, malformed, wrong-leaf, wrong-root, wrong-profile, and over-limit proofs."
+      ]
+    },
+    {
+      "id": "MERKLETREE-DEC-006",
+      "authoritative_sources": [
+        "rfc9162-source"
+      ],
+      "executable_evidence": [
+        "TestConsistencyProofMatchesRFC9162Examples",
+        "TestConsistencyProofEqualSizeRequiresIdenticalRoots",
+        "TestConsistencyProofSupportsEqualEmptyTrees",
+        "TestConsistencyProofRejectsInvalidRequestsAndResourceClaims"
+      ],
+      "fixtures": [
+        "testdata/rfc9162-sha256-v1.json"
+      ],
+      "fuzz": [
+        "FuzzVerifyConsistency",
+        "FuzzParseConsistencyProof"
+      ],
+      "differential_evidence": [
+        "differential_test.go"
+      ],
+      "differential_classification": "deliberate policy difference",
+      "public_behavior": [
+        "Equal sizes require identical complete roots and an empty proof; zero-to-nonzero generation, encoding, and verification are rejected; other proofs use RFC SUBPROOF order."
+      ]
+    },
+    {
+      "id": "MERKLETREE-DEC-007",
+      "authoritative_sources": [
+        "rfc9162-source"
+      ],
+      "executable_evidence": [
+        "TestMultiInclusionProofCanonicalizesIndexesAndOwnsSlices",
+        "TestMultiInclusionProofExhaustivelyAuthenticatesSmallSubsets",
+        "TestVerifyMultiInclusionRejectsMalformedAndNonVerifyingProofs"
+      ],
+      "fixtures": [
+
+      ],
+      "fuzz": [
+        "FuzzVerifyMultiInclusion",
+        "FuzzParseMultiInclusionProof"
+      ],
+      "differential_evidence": [
+
+      ],
+      "differential_classification": "not assessed",
+      "public_behavior": [
+        "Copy, sort, and require unique in-range indexes, then emit the minimal left-to-right depth-first frontier; verification requires canonical leaf order and exact frontier consumption."
+      ]
+    },
+    {
+      "id": "MERKLETREE-DEC-008",
+      "authoritative_sources": [
+        "rfc9162-source"
+      ],
+      "executable_evidence": [
+        "TestBuilderBatchAppendIsAtomic",
+        "TestBuilderAppendSnapshotsMatchBatchConstruction",
+        "TestRootBuilderBatchAppendIsAtomicAndBounded",
+        "TestLeafAndDigestBytesNeverAliasCallerMemory"
+      ],
+      "fixtures": [
+
+      ],
+      "fuzz": [
+
+      ],
+      "differential_evidence": [
+
+      ],
+      "differential_classification": "not assessed",
+      "public_behavior": [
+        "Builders are caller-synchronized; batches validate and compute before publication; inputs are copied or hashed immediately; returned snapshots own immutable state."
+      ]
+    },
+    {
+      "id": "MERKLETREE-DEC-009",
+      "authoritative_sources": [
+        "rfc9162-source"
+      ],
+      "executable_evidence": [
+        "TestRootCanonicalBinaryEncodingFixture",
+        "TestProofCanonicalBinaryEncodingFixtures",
+        "TestProofDecodersRejectTruncatedTrailingAndWrongOperation",
+        "TestSnapshotPersistenceRejectsMalformedAndBoundedInput"
+      ],
+      "fixtures": [
+
+      ],
+      "fuzz": [
+        "FuzzParseRoot",
+        "FuzzParseInclusionProof",
+        "FuzzParseConsistencyProof",
+        "FuzzParseMultiInclusionProof",
+        "FuzzParseSnapshot"
+      ],
+      "differential_evidence": [
+
+      ],
+      "differential_classification": "not assessed",
+      "public_behavior": [
+        "Version 1 uses MTRE, explicit object type and identity, fixed-width big-endian integers, exact SHA-256 digests, and operation-specific canonical structure; decoders reject all non-canonical input."
+      ]
+    },
+    {
+      "id": "MERKLETREE-DEC-010",
+      "authoritative_sources": [
+        "rfc9162-source"
+      ],
+      "executable_evidence": [
+        "TestSnapshotPersistenceRoundTripAndResume",
+        "TestSnapshotPersistenceRejectsCorruptMetadataAndNodes",
+        "TestResumeBuilderValidationCancellationAndLimits",
+        "TestSnapshotPersistenceEmptyMetadataAndInternalCorruption"
+      ],
+      "fixtures": [
+
+      ],
+      "fuzz": [
+        "FuzzParseSnapshot"
+      ],
+      "differential_evidence": [
+
+      ],
+      "differential_classification": "not assessed",
+      "public_behavior": [
+        "Persist canonical postorder digest nodes and metadata but never raw leaves; validate topology, hashes, root identity, uniqueness, and limits; ResumeBuilder requires a trusted expected raw-byte count."
+      ]
+    }
+  ]
+}

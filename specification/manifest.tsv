@@ -1,2 +1,4 @@
 id	version	role	status	sha256	bytes	url
+rfc9162-source	RFC-9162-December-2021	normative-specification	pinned	a0e432ce7580c99fcc8faf0cf3f6191f9ce6b4864f949158e020d4ecb295081f	128266	https://www.rfc-editor.org/rfc/rfc9162.txt
+rfc9162-errata	RFC-9162-reviewed-2026-08-30	errata-change-feed	pinned	f4bf9d6d9a1d8c1b5c0bc69240e85a5bcbc2e451272003bcb0d13f8dbc55e8aa	13973	https://errata.rfc-editor.org/search/?rfc_number=9162&presentation=records
 rfc9162-sha256-v1	RFC-9162	reference-vector-corpus	pinned	1ee115281c3a1861ef9e92e126e1f2bf7e043bc0ce4ada8b83a9d54d4ab885c7	4577	https://www.rfc-editor.org/rfc/rfc9162
