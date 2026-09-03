@@ -4,6 +4,10 @@
 
 ### Changed
 
+- Adopt the checksum-verified `go-library-tools` v1.3.0 CLI, schema-v2 cohesion
+  metadata, and repository-local cohesion gate without changing the public API
+  or runtime behavior.
+- Pin reusable CI to the immutable v1.3.0 cohesion-enforcement workflow.
 - Replace copied repository-local verification tooling with the released,
   checksum-pinned `go-library-tools` v1.2.0 CLI and the immutable
   `1f9629e5f27418600460b55a50a5b2fc81697fab` workflow while preserving the
@@ -31,6 +35,9 @@
 
 ### Documentation
 
+- Publish the module's family, capabilities, ownership, lifecycle, supported
+  environments, and package-selection metadata, with versioned ecosystem
+  navigation from the README.
 - Replace archived monorepo links and completed execution artifacts with a
   standalone, human-oriented documentation structure.
 

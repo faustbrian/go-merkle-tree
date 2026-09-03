@@ -66,10 +66,17 @@ contains the complete builder, proof, specification, and v1 boundary notes.
 Observable RFC interpretations and package policies are maintained in the
 [specification decision register](docs/specification-decisions.md).
 
+For ecosystem-wide selection and ownership guidance, see the versioned
+[Golib ecosystem index](https://github.com/faustbrian/go-library-tools/blob/v1.3.0/docs/ecosystem/README.md)
+and its [Domain utilities family](https://github.com/faustbrian/go-library-tools/blob/v1.3.0/docs/ecosystem/design-language.md#package-families-and-selection).
+
 ## Development
 
 Run `make check` before changing profile, hashing, proof, or serialization
 behavior.
+
+Run `make cohesion` to validate the module's family, ownership, lifecycle,
+documentation, and supported-environment metadata.
 
 ## License
 
