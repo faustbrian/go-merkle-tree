@@ -1,8 +1,15 @@
 # Security
 
-Report suspected vulnerabilities privately to the repository maintainers
-before public disclosure. Do not attach confidential leaves, persisted trees,
-roots from private systems, or proof corpora to a public report.
+Do not open a public issue for a suspected vulnerability. Report it privately
+through [GitHub Security Advisories for
+`faustbrian/go-merkle-tree`](https://github.com/faustbrian/go-merkle-tree/security/advisories/new)
+before public disclosure. Include the affected version, a minimal reproduction
+when safe, impact, and relevant resource limits. Do not attach confidential
+leaves, persisted trees, roots from private systems, or proof corpora.
+
+Published releases follow [`COMPATIBILITY.md`](COMPATIBILITY.md) and
+[`DEPRECATION.md`](DEPRECATION.md). At and after v1, incompatible exported API
+or documented behavior changes require a new major version.
 
 ## Trust model
 
