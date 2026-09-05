@@ -35,13 +35,17 @@
 
 ### Documentation
 
+- Document stable-v1 maturity, the exact Go and package identifiers, and the
+  portable-Go boundary; link executable examples and complete support and
+  security navigation.
+
 - Publish the module's family, capabilities, ownership, lifecycle, supported
   environments, and package-selection metadata, with versioned ecosystem
   navigation from the README.
 - Replace archived monorepo links and completed execution artifacts with a
   standalone, human-oriented documentation structure.
 
-## 1.0.0 - 2026-08-25
+## 1.0.0 - 2026-08-26
 
 ### Changed
 

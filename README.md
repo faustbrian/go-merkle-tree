@@ -18,6 +18,14 @@ inclusion, multi-inclusion, and consistency proofs.
 The stable v1 surface supports the package canonical binary profile and the
 RFC 9162 Certificate Transparency profile.
 
+## Status and portability
+
+The module is stable at v1 and requires Go 1.26.6. Its single public package
+uses the default import identifier `merkletree`. The package is portable Go: it
+has no platform-specific source files and requires no operating-system service
+or external runtime backend. That portability statement does not imply
+validation on every `GOOS` and `GOARCH` combination.
+
 ## Installation
 
 ```sh
@@ -47,6 +55,11 @@ if err != nil {
 Use `NewSnapshot` when proof generation is required and `NewRootBuilder` for
 streaming root computation with logarithmic retained state.
 
+The checked-in [`ExampleComputeRoot`](example_test.go) is the executable
+five-minute version of this flow. It is compiled and run by the Go example test
+gate. The same file contains executable examples for snapshots, builders,
+proofs, persistence, and resumption.
+
 ## Guarantees and limits
 
 - Leaves, digests, roots, snapshots, and proofs own their retained bytes.
@@ -60,10 +73,15 @@ streaming root computation with logarithmic retained state.
 
 ## Documentation
 
-Use the [documentation index](docs/README.md) for profiles, proof semantics,
-security, compatibility, and operations. The [detailed reference](docs/reference.md)
-contains the complete builder, proof, specification, and v1 boundary notes.
-Observable RFC interpretations and package policies are maintained in the
+Use the [documentation index](docs/README.md) for the complete guide set. Start
+with [adoption and FAQ](docs/adoption.md), the
+[detailed reference](docs/reference.md), and the
+[executable examples](example_test.go). Operational and project navigation is
+available through [errors and recovery](docs/errors-and-recovery.md),
+[support](SUPPORT.md), [security reporting](SECURITY.md), the
+[compatibility policy](COMPATIBILITY.md), the [changelog](CHANGELOG.md), and
+the [license](LICENSE). Observable RFC interpretations and package policies are
+maintained in the
 [specification decision register](docs/specification-decisions.md).
 
 For ecosystem-wide selection and ownership guidance, see the versioned
