@@ -24,8 +24,9 @@ shown here.
   the module path declared by the root `go.mod`.
 - Every module MUST be declared in `modules.json`, and every package MUST be
   declared in `packages.json`.
-- Independently releasable modules MUST retain independent `go.mod` files and
-  directory-prefixed semantic-version tags.
+- Independently releasable modules MUST retain independent `go.mod` files.
+  Root-module tags MUST use `v<version>`. Independently releasable nested-module
+  tags MUST use `<module-directory>/v<version>`.
 - Cross-module dependencies MUST remain acyclic and MUST use public contracts.
 - Permanent `replace` directives, sibling repositories, and absolute developer
   paths are forbidden in releasable modules.

@@ -35,6 +35,9 @@
 
 ### Documentation
 
+- Align repository policy and consumer guidance on root `v<version>` tags and
+  nested-module `<module-directory>/v<version>` tags.
+
 - Document stable-v1 maturity, the exact Go and package identifiers, and the
   portable-Go boundary; link executable examples and complete support and
   security navigation.
