@@ -7,7 +7,7 @@
 [![Documentation](https://img.shields.io/badge/docs-checked_in_CI-blue)](docs/)
 [![Go Reference](https://pkg.go.dev/badge/github.com/faustbrian/go-merkle-tree.svg)](https://pkg.go.dev/github.com/faustbrian/go-merkle-tree)
 [![Release](https://img.shields.io/github/v/release/faustbrian/go-merkle-tree?sort=semver)](https://github.com/faustbrian/go-merkle-tree/releases)
-[![Go](https://img.shields.io/badge/go-1.26.6-00ADD8?logo=go)](https://go.dev/)
+[![Go](https://img.shields.io/badge/go-1.27.0-00ADD8?logo=go)](https://go.dev/)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
 `merkle-tree` is a storage-independent library for explicitly profiled,
@@ -20,7 +20,7 @@ RFC 9162 Certificate Transparency profile.
 
 ## Status and portability
 
-The module is stable at v1 and requires Go 1.26.6. Its single public package
+The module is stable at v1 and requires Go 1.27.0. Its single public package
 uses the default import identifier `merkletree`. The package is portable Go: it
 has no platform-specific source files and requires no operating-system service
 or external runtime backend. That portability statement does not imply
