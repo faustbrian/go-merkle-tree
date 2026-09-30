@@ -173,7 +173,7 @@ changelog review, and never let peer behavior override the authoritative source.
 | Interoperability evidence | differential_test.go |
 | Affected public APIs | Snapshot.InclusionProof<br>VerifyInclusion<br>InclusionProof |
 | Affected documentation | docs/structures.md<br>docs/encoding.md<br>docs/reference.md |
-| Upstream status | RFC 9162 defines generation and verification algorithms; no applicable erratum is currently recorded. |
+| Upstream status | RFC 9162 Erratum 8670 (Editorial, Held for Document Update) removes the redundant or fn is 0 termination clause from section 2.1.3.2 step 5.b.ii; recursive inclusion verification here needs no behavior change. |
 | Reconsider when | RFC 9162 errata changes audit-path generation or verification semantics. |
 
 ## MERKLETREE-DEC-006: Consistency proof edge cases
@@ -205,7 +205,7 @@ changelog review, and never let peer behavior override the authoritative source.
 | Interoperability evidence | differential_test.go |
 | Affected public APIs | Snapshot.ConsistencyProof<br>VerifyConsistency<br>ConsistencyProof |
 | Affected documentation | docs/structures.md<br>docs/encoding.md<br>docs/reference.md |
-| Upstream status | RFC 9162 omits zero-to-nonzero and equal-size proof operations; no accepted erratum currently defines them. |
+| Upstream status | RFC 9162 Erratum 8670 (Editorial, Held for Document Update) also removes the redundant or fn is 0 termination clause from section 2.1.4.2 step 6.b.iii; the verifier merge guard establishes nonzero fn before shifting. It does not define zero-to-nonzero or equal-size proof operations. |
 | Reconsider when | An accepted RFC erratum or successor specification defines either transition. |
 
 ## MERKLETREE-DEC-007: Multi-inclusion proof authority
