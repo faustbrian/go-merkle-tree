@@ -13,6 +13,9 @@ or documented behavior changes require a new major version.
 
 ## Trust model
 
+The versioned [security threat model](docs/security-threat-model.md) maps the
+complete public family, hostile-input controls, and caller-owned residual risks.
+
 A proof establishes only that supplied leaf bytes participate in a particular
 cryptographic relationship under a trusted complete root identity:
 

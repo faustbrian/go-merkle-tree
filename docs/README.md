@@ -25,6 +25,7 @@ supported public contract.
 
 - [Errors And Recovery](errors-and-recovery.md)
 - [Security model](../SECURITY.md)
+- [Security threat model](security-threat-model.md)
 - [Support](../SUPPORT.md)
 
 ## Reference and maintenance
