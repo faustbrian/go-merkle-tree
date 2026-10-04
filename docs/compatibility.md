@@ -45,3 +45,15 @@ The package does not implement or claim compatibility with:
 
 Protocols must compare the complete root identity. Digest equality between
 profiles is not permission to discard or silently convert the profile.
+
+## Go and dependency versions
+
+The v1.1.0 source requires Go 1.27.0 or newer; published v1.0.0 requires
+Go 1.26.6. Consumers using the older floor must upgrade their toolchain before
+adopting v1.1.0. Public APIs and the version-1 proof and snapshot formats are
+unchanged.
+
+Production uses only the Go standard library. The four peer libraries in
+`go.mod` support test, conformance and comparison work, not production imports.
+The current cbergoon comparison pin is v0.5.0; its native benchmark track does
+not establish RFC interoperability or a cross-library performance ranking.

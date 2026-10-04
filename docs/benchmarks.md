@@ -39,6 +39,10 @@ requirements in `go.mod`, `go.sum`, and the reference-fixture provenance. They
 are not imported by production package files. Tag recency is reported rather
 than asserting an unverified maintenance status.
 
+The v1.1.0 source now selects cbergoon v0.5.0 and requires Go 1.27.0. The
+July module table and measurements below remain historical v0.2.0 evidence;
+no new latency ranking or measurement is implied by the dependency update.
+
 ## Semantic tracks
 
 No end-to-end latency ranking is valid across these APIs:
