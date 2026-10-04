@@ -2,6 +2,24 @@
 
 ## Unreleased
 
+## 1.1.0 - 2026-10-04
+
+### Changed
+
+- Require Go 1.27.0 or newer, replacing the v1.0.0 minimum of Go 1.26.6.
+  Arrange the newer toolchain before upgrading; public APIs, proof formats,
+  and runtime behavior remain unchanged.
+- Update the test-only cbergoon comparison dependency from v0.2.0 to v0.5.0.
+  Production package files continue to import only the standard library.
+- Correct module metadata to distinguish test and comparison dependencies
+  from runtime dependencies.
+
+### Documentation
+
+- Preserve the original v1.0.0 source record, dated August 25. Its signed tag
+  and GitHub publication occurred on August 26, 2026; the original date is
+  release-preparation history rather than evidence of earlier publication.
+
 ### Changed
 
 - Adopt the final checksum-verified `go-library-tools` v1.4.0 CLI, schema-v2 cohesion
@@ -53,7 +71,7 @@
 - Replace archived monorepo links and completed execution artifacts with a
   standalone, human-oriented documentation structure.
 
-## 1.0.0 - 2026-08-26
+## 1.0.0 - 2026-08-25
 
 ### Changed
 
@@ -76,7 +94,7 @@
 
 ### Documentation
 
-- Link the package README to package-owned documentation.
+- Link the package README to the repository-wide Golib documentation portal.
 
 ### Changed
 
