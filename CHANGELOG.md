@@ -22,6 +22,11 @@
 
 ### Specification Decisions
 
+- Correct the upstream status of inclusion and consistency decisions for
+  editorial RFC 9162 Erratum 8670 without changing their selected behavior.
+- MERKLETREE-DEC-005 sha256:5454c651c13d3afc7b34e037c1406bd430c810ff7d1df2e91f0636e373d201ee
+- MERKLETREE-DEC-006 sha256:3675ecdd0eea242c2f2c6335a93cf9856fdcfdb7ead517d6ce6b892d45fe6100
+
 - MERKLETREE-DEC-001 sha256:fa3421258576aa3899d8782dd7e304111f5df49a99991077bf56607d145987b5
 - MERKLETREE-DEC-002 sha256:5f24b34120614a05f9dad87961f65941c6317fc1bfe48d06fd9b854e0b7fcb5d
 - MERKLETREE-DEC-003 sha256:4488606b3445e521712b3b60287623c05640f1cfdee6deac982138eaa1b14783
