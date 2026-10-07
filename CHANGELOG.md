@@ -9,6 +9,12 @@
 - Refresh the shared CI workflow while retaining the configured CLI,
   immutable tooling-source selection, and public Merkle-tree contracts.
 
+### Security
+
+- Update the repository development lock to smol-toml 1.9.0 for the
+  patched TOML parser. The configured CLI retains its separate embedded
+  spelling dependencies; this does not certify those dependencies.
+
 ## 1.1.0 - 2026-10-04
 
 ### Changed
