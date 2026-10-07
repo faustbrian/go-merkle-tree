@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+## 1.1.1 - 2026-10-07
+
+### Changed
+
+- Refresh the shared CI workflow while retaining the configured CLI,
+  immutable tooling-source selection, and public Merkle-tree contracts.
+
 ## 1.1.0 - 2026-10-04
 
 ### Changed
