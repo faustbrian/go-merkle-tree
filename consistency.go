@@ -127,6 +127,7 @@ func (snapshot Snapshot) ConsistencyProof(
 			Actual: elementCount,
 		}
 	}
+	// #nosec G115 -- bits.Len64 returns a nonnegative depth no greater than 64.
 	depth := uint64(bits.Len64(newerSize))
 	if depth > limits.MaxTraversalDepth {
 		return ConsistencyProof{}, &ResourceError{
@@ -266,6 +267,7 @@ func VerifyConsistency(
 			Actual: elementCount,
 		}
 	}
+	// #nosec G115 -- bits.Len64 returns a nonnegative depth no greater than 64.
 	depth := uint64(bits.Len64(proof.newerTreeSize))
 	if depth > limits.MaxTraversalDepth {
 		return &ResourceError{

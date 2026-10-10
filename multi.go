@@ -148,6 +148,7 @@ func (snapshot Snapshot) MultiInclusionProof(
 		}
 	}
 
+	// #nosec G115 -- bits.Len64 returns a nonnegative depth no greater than 64.
 	depth := uint64(bits.Len64(treeSize))
 	if depth > limits.MaxTraversalDepth {
 		return MultiInclusionProof{}, &ResourceError{
@@ -285,6 +286,7 @@ func VerifyMultiInclusion(
 			Actual: elementCount,
 		}
 	}
+	// #nosec G115 -- bits.Len64 returns a nonnegative depth no greater than 64.
 	depth := uint64(bits.Len64(proof.treeSize))
 	if depth > limits.MaxTraversalDepth {
 		return &ResourceError{

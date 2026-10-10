@@ -142,6 +142,7 @@ func NewSnapshot(
 		}, nil
 	}
 
+	// #nosec G115 -- Validated MaxRetainedNodes bounds the node capacity by MaxInt.
 	nodes := make([]snapshotNode, 0, int(nodeCount))
 	stack := make([]uint64, 0, bits.Len64(uint64(len(leaves))))
 	for index, leaf := range leaves {
@@ -155,6 +156,7 @@ func NewSnapshot(
 			left:   noSnapshotNode,
 			right:  noSnapshotNode,
 		})
+		// #nosec G115 -- The index follows a nonempty node append and is nonnegative.
 		stack = append(stack, uint64(len(nodes)-1))
 		completedSize := uint64(index) + 1
 		for completedSize&1 == 0 {
@@ -166,6 +168,7 @@ func NewSnapshot(
 			left := stack[len(stack)-2]
 			stack = stack[:len(stack)-2]
 			nodes = append(nodes, newSnapshotBranch(nodes, left, right))
+			// #nosec G115 -- The index follows a nonempty node append and is nonnegative.
 			stack = append(stack, uint64(len(nodes)-1))
 			completedSize >>= 1
 		}
@@ -178,6 +181,7 @@ func NewSnapshot(
 		}
 
 		nodes = append(nodes, newSnapshotBranch(nodes, stack[index], rootNode))
+		// #nosec G115 -- The index follows a nonempty node append and is nonnegative.
 		rootNode = uint64(len(nodes) - 1)
 	}
 
@@ -275,6 +279,7 @@ func (snapshot Snapshot) InclusionProof(
 			Actual: elementCount,
 		}
 	}
+	// #nosec G115 -- bits.Len64 returns a nonnegative depth no greater than 64.
 	depth := uint64(bits.Len64(treeSize))
 	if depth > limits.MaxTraversalDepth {
 		return InclusionProof{}, &ResourceError{
@@ -442,6 +447,7 @@ func VerifyInclusion(
 			Actual: elementCount,
 		}
 	}
+	// #nosec G115 -- bits.Len64 returns a nonnegative depth no greater than 64.
 	depth := uint64(bits.Len64(proof.treeSize))
 	if depth > limits.MaxTraversalDepth {
 		return &ResourceError{

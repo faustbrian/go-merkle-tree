@@ -186,6 +186,7 @@ func ParseSnapshot(
 			Actual: nodeCount,
 		}
 	}
+	// #nosec G115 -- bits.Len64 returns a nonnegative depth no greater than 64.
 	depth := uint64(bits.Len64(treeSize))
 	if depth > limits.MaxTraversalDepth {
 		return Snapshot{}, &ResourceError{
@@ -202,10 +203,12 @@ func ParseSnapshot(
 	if sizeErr != nil {
 		return Snapshot{}, ErrMalformedEncoding
 	}
+	// #nosec G115 -- encodedVectorSize has rejected overflow and sizes above MaxInt.
 	if uint64(temporaryBytes) > limits.MaxTemporaryBytes {
 		return Snapshot{}, &ResourceError{
-			Kind:   ResourceTemporaryBytes,
-			Limit:  limits.MaxTemporaryBytes,
+			Kind:  ResourceTemporaryBytes,
+			Limit: limits.MaxTemporaryBytes,
+			// #nosec G115 -- encodedVectorSize has rejected overflow and sizes above MaxInt.
 			Actual: uint64(temporaryBytes),
 		}
 	}
@@ -221,6 +224,7 @@ func ParseSnapshot(
 		return Snapshot{}, ErrMalformedEncoding
 	}
 
+	// #nosec G115 -- Checked vector size and encoded length bound nodeCount by MaxInt.
 	nodes := make([]snapshotNode, int(nodeCount))
 	for index := range nodes {
 		if err := ctx.Err(); err != nil {
@@ -331,6 +335,7 @@ func ResumeBuilder(
 		return builder, nil
 	}
 
+	// #nosec G115 -- Resume validates retained-node limits against MaxInt before this allocation.
 	builder.nodes = make([]snapshotNode, 0, int(nodeCount))
 	builder.frontier = make(
 		[]uint64,
@@ -348,6 +353,7 @@ func ResumeBuilder(
 		builder.nodes = append(builder.nodes, node)
 		builder.frontier = append(
 			builder.frontier,
+			// #nosec G115 -- The index follows a nonempty node append and is nonnegative.
 			uint64(len(builder.nodes)-1),
 		)
 		completed = saturatedAdd(completed, 1)
@@ -361,6 +367,7 @@ func ResumeBuilder(
 			)
 			builder.frontier = append(
 				builder.frontier,
+				// #nosec G115 -- The index follows a nonempty node append and is nonnegative.
 				uint64(len(builder.nodes)-1),
 			)
 		}
@@ -393,6 +400,7 @@ func validateSnapshotStructure(
 
 		return nil
 	}
+	// #nosec G115 -- The nonempty tree and validated node count make len(nodes)-1 nonnegative.
 	if snapshot.rootNode != uint64(len(snapshot.nodes)-1) {
 		return ErrInvalidSnapshot
 	}

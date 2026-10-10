@@ -101,6 +101,7 @@ func ParseInclusionProof(
 			Actual: elementCount,
 		}
 	}
+	// #nosec G115 -- bits.Len64 returns a nonnegative depth no greater than 64.
 	depth := uint64(bits.Len64(treeSize))
 	if depth > proofLimits.MaxTraversalDepth {
 		return InclusionProof{}, &ResourceError{
@@ -126,7 +127,8 @@ func ParseInclusionProof(
 		treeSize:       treeSize,
 		leafIndex:      leafIndex,
 		leafDigest:     newDigest(profile.algorithm, leafDigest),
-		siblings:       make([]Digest, int(elementCount)),
+		// #nosec G115 -- encodedVectorSize has rejected overflow and sizes above MaxInt.
+		siblings: make([]Digest, int(elementCount)),
 	}
 	for index := range proof.siblings {
 		if err := ctx.Err(); err != nil {
@@ -224,6 +226,7 @@ func ParseConsistencyProof(
 			Actual: elementCount,
 		}
 	}
+	// #nosec G115 -- bits.Len64 returns a nonnegative depth no greater than 64.
 	depth := uint64(bits.Len64(newerSize))
 	if depth > proofLimits.MaxTraversalDepth {
 		return ConsistencyProof{}, &ResourceError{
@@ -249,7 +252,8 @@ func ParseConsistencyProof(
 		newerRoot:      newRoot(profile, newerSize, newerDigest),
 		olderTreeSize:  olderSize,
 		newerTreeSize:  newerSize,
-		nodes:          make([]Digest, int(elementCount)),
+		// #nosec G115 -- encodedVectorSize has rejected overflow and sizes above MaxInt.
+		nodes: make([]Digest, int(elementCount)),
 	}
 	for index := range proof.nodes {
 		if err := ctx.Err(); err != nil {
@@ -356,6 +360,7 @@ func ParseMultiInclusionProof(
 			Actual: leafCount,
 		}
 	}
+	// #nosec G115 -- bits.Len64 returns a nonnegative depth no greater than 64.
 	depth := uint64(bits.Len64(treeSize))
 	if depth > proofLimits.MaxTraversalDepth {
 		return MultiInclusionProof{}, &ResourceError{
@@ -394,9 +399,12 @@ func ParseMultiInclusionProof(
 		algorithm:      profile.algorithm,
 		root:           newRoot(profile, treeSize, rootDigest),
 		treeSize:       treeSize,
-		leafIndexes:    make([]uint64, int(leafCount)),
-		leafDigests:    make([]Digest, int(leafCount)),
-		frontier:       make([]Digest, int(frontierCount)),
+		// #nosec G115 -- Checked vector size and encoded length bound this count by MaxInt.
+		leafIndexes: make([]uint64, int(leafCount)),
+		// #nosec G115 -- Checked vector size and encoded length bound this count by MaxInt.
+		leafDigests: make([]Digest, int(leafCount)),
+		// #nosec G115 -- Checked vector size and encoded length bound this count by MaxInt.
+		frontier: make([]Digest, int(frontierCount)),
 	}
 	for index := range proof.leafIndexes {
 		if err := ctx.Err(); err != nil {
@@ -537,11 +545,14 @@ func encodedVectorSize(
 	elementSize uint64,
 ) (int, error) {
 	high, product := bits.Mul64(count, elementSize)
+	// #nosec G115 -- Production callers supply nonnegative frame sizes; carry and ceiling checks reject invalid sizes.
 	size, carry := bits.Add64(uint64(base), product, 0)
+	// #nosec G115 -- The native maximum int is nonnegative.
 	if high != 0 || carry != 0 || size > uint64(maxInt()) {
 		return 0, ErrMalformedEncoding
 	}
 
+	// #nosec G115 -- The preceding guard rejects values above MaxInt.
 	return int(size), nil
 }
 

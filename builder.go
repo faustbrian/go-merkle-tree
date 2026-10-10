@@ -127,6 +127,7 @@ func (builder *Builder) AppendBatch(
 			left:   noSnapshotNode,
 			right:  noSnapshotNode,
 		})
+		// #nosec G115 -- The index follows a nonempty node append and is nonnegative.
 		frontier = append(frontier, baseNode+uint64(len(newNodes)-1))
 		completedSize++
 		for mergedSize := completedSize; mergedSize&1 == 0; mergedSize >>= 1 {
@@ -143,6 +144,7 @@ func (builder *Builder) AppendBatch(
 			)
 			frontier = append(
 				frontier,
+				// #nosec G115 -- The index follows a nonempty node append and is nonnegative.
 				baseNode+uint64(len(newNodes)-1),
 			)
 		}
@@ -206,6 +208,7 @@ func (builder *Builder) Snapshot(ctx context.Context) (Snapshot, error) {
 		}, nil
 	}
 
+	// #nosec G115 -- Snapshot validation bounds retained-node capacity by MaxInt.
 	nodes := make([]snapshotNode, len(builder.nodes), int(
 		snapshotNodeCount(builder.treeSize),
 	))
@@ -224,6 +227,7 @@ func (builder *Builder) Snapshot(ctx context.Context) (Snapshot, error) {
 			return Snapshot{}, err
 		}
 		nodes = append(nodes, newSnapshotBranch(nodes, frontier[index], rootNode))
+		// #nosec G115 -- The index follows a nonempty node append and is nonnegative.
 		rootNode = uint64(len(nodes) - 1)
 	}
 	rootDigest := nodes[rootNode].digest
