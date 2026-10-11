@@ -84,6 +84,29 @@ release boundary, not every commit. Report unavailable or failed checks honestly
 a fast local pass is not public-release or hosted-CI qualification.
 CI/configuration-only changes do not require a module release.
 
+## Selected Weekly Assurance
+
+The owner-level [selected-assurance caller](.github/workflows/assurance.yml) is
+configured for main only, on Sundays at 04:43 UTC. It selects one of the
+9 current declared root-module fuzz targets using the shared UTC-week
+rotation, with 30 seconds of active exploration.
+The selected risks are deterministic root construction, inclusion/consistency/
+multi-inclusion verification and canonical decoding of roots, proofs and snapshots.
+This is not complete cryptographic/profile, cancellation, resource-limit or
+public-consumer qualification; keep the relevant RFC 9162/profile conformance,
+full operations and affected lifecycle/resource assertions.
+
+Base-free ordinary checks execute deterministic seeds, not active exploration;
+committed-range CI selects affected active smoke. Manual assurance requires an
+exact anchored selector from the root fuzz operation in `.golib.yaml`, for
+example `^FuzzParseInclusionProof$`. Empty, unknown and malformed selections refuse.
+The shared job bounds setup and execution to ten minutes, its native session
+to five minutes, active workers and CPU to two, owned memory to 2 GiB, native
+output to 1 MiB and private-cache lifetime. Failure, cancellation, exhausted
+budgets and cleanup refusal remain attributable failures. This lane does not
+run mutation or replace Required, original full fuzz budgets, explicit
+`make check-full`, nested/service contracts or relevant release qualification.
+
 ## Adding A Module
 
 Follow [repository structure policy](AGENTS.md#repository-structure). New modules
