@@ -3,7 +3,7 @@
 [![CI](https://github.com/faustbrian/go-merkle-tree/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/faustbrian/go-merkle-tree/actions/workflows/ci.yml)
 [![CodeQL](https://img.shields.io/badge/CodeQL-required-blue)](https://github.com/faustbrian/go-merkle-tree/actions/workflows/ci.yml)
 [![Coverage](https://img.shields.io/badge/coverage-100%25_required-blue)](CONTRIBUTING.md#verification)
-[![Mutation](https://img.shields.io/badge/mutation-100%25_required-blue)](CONTRIBUTING.md#verification)
+[![Mutation](https://img.shields.io/badge/mutation-optional_local-blue)](CONTRIBUTING.md#verification)
 [![Documentation](https://img.shields.io/badge/docs-checked_in_CI-blue)](docs/)
 [![Go Reference](https://pkg.go.dev/badge/github.com/faustbrian/go-merkle-tree.svg)](https://pkg.go.dev/github.com/faustbrian/go-merkle-tree)
 [![Release](https://img.shields.io/github/v/release/faustbrian/go-merkle-tree?sort=semver)](https://github.com/faustbrian/go-merkle-tree/releases)
@@ -90,8 +90,12 @@ and its [Domain utilities family](https://github.com/faustbrian/go-library-tools
 
 ## Development
 
-Run `make check` before changing profile, hashing, proof, or serialization
-behavior.
+Start with `go test ./...` or a focused package/test selector. `make check` and
+`make ci` use bounded checks with the public verifier declared in `.golib.yaml`.
+Profile, hashing and proof changes retain affected conformance assertions;
+serialization changes retain focused parser regressions and active fuzz smoke.
+See [contributor verification](CONTRIBUTING.md#verification) for focused fuzzing,
+optional local mutation and explicit full/release qualification.
 
 Run `make cohesion` to validate the module's family, ownership, lifecycle,
 documentation, and supported-environment metadata.
