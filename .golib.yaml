@@ -26,10 +26,60 @@ operations:
   - module: .
     gate: fuzz
     steps:
-      - type: make
-        makefile: verification/package.mk
-        target: fuzz
-        timeout: 20m
+      - type: go-test
+        packages: ["."]
+        fuzz: '^FuzzComputeRoot$'
+        budget: 10000x
+        count: 1
+        timeout: 2m
+      - type: go-test
+        packages: ["."]
+        fuzz: '^FuzzVerifyInclusion$'
+        budget: 10000x
+        count: 1
+        timeout: 2m
+      - type: go-test
+        packages: ["."]
+        fuzz: '^FuzzVerifyConsistency$'
+        budget: 10000x
+        count: 1
+        timeout: 2m
+      - type: go-test
+        packages: ["."]
+        fuzz: '^FuzzVerifyMultiInclusion$'
+        budget: 10000x
+        count: 1
+        timeout: 2m
+      - type: go-test
+        packages: ["."]
+        fuzz: '^FuzzParseRoot$'
+        budget: 10000x
+        count: 1
+        timeout: 2m
+      - type: go-test
+        packages: ["."]
+        fuzz: '^FuzzParseInclusionProof$'
+        budget: 10000x
+        count: 1
+        timeout: 2m
+      - type: go-test
+        packages: ["."]
+        fuzz: '^FuzzParseConsistencyProof$'
+        budget: 10000x
+        count: 1
+        timeout: 2m
+      - type: go-test
+        packages: ["."]
+        fuzz: '^FuzzParseMultiInclusionProof$'
+        budget: 10000x
+        count: 1
+        timeout: 2m
+      - type: go-test
+        packages: ["."]
+        fuzz: '^FuzzParseSnapshot$'
+        budget: 10000x
+        count: 1
+        timeout: 2m
   - module: .
     gate: conformance
     steps:
