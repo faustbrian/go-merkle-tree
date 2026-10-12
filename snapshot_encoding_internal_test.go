@@ -150,6 +150,9 @@ func TestSnapshotPersistenceInputAndResourceLimits(t *testing.T) {
 	}
 }
 
+// TestSnapshotPersistenceRejectsCorruptMetadataAndNodes targets byte offsets
+// in the 74-byte snapshot prefix and 56-byte postorder node records. Mutating
+// isolated cloned frames separates graph/shape rejection from valid framing.
 func TestSnapshotPersistenceRejectsCorruptMetadataAndNodes(t *testing.T) {
 	t.Parallel()
 

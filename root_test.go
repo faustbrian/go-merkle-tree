@@ -450,6 +450,9 @@ func TestNewRawLeafWithLimitBoundsBeforeCopying(t *testing.T) {
 	}
 }
 
+// referenceTreeHash follows the recursive RFC definition over raw bytes,
+// independently of the production incremental frontier. This avoids comparing
+// the frontier implementation with itself.
 func referenceTreeHash(leaves [][]byte) []byte {
 	switch len(leaves) {
 	case 0:
@@ -492,6 +495,8 @@ func equalBytes(left, right []byte) bool {
 	return true
 }
 
+// cancelAfterErrCalls exposes a deterministic cancellation boundary at an Err
+// call; it does not simulate the duration or preemption of hashing work.
 type cancelAfterErrCalls struct {
 	remaining int
 	done      chan struct{}

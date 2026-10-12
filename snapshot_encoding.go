@@ -22,12 +22,26 @@ const (
 // validation. Every field must be nonzero. Values are copied and remain
 // immutable during an operation.
 type SnapshotPersistenceLimits struct {
-	MaxEncodedBytes   uint64
-	MaxLeaves         uint64
+	// MaxEncodedBytes bounds the maximum complete snapshot frame length,
+	// including its header.
+	MaxEncodedBytes uint64
+	// MaxLeaves bounds the maximum declared tree size.
+	MaxLeaves uint64
+	// MaxTotalLeafBytes bounds the maximum declared cumulative raw leaf bytes,
+	// not authenticated lengths.
 	MaxTotalLeafBytes uint64
-	MaxRetainedNodes  uint64
+	// MaxRetainedNodes bounds the maximum number of decoded leaf and branch
+	// nodes.
+	MaxRetainedNodes uint64
+	// MaxTraversalDepth bounds the maximum bits.Len64(treeSize) at admission,
+	// plus structural depth bound.
 	MaxTraversalDepth uint64
-	MaxNodeReads      uint64
+	// MaxNodeReads bounds the maximum nodes visited during complete structural
+	// validation.
+	MaxNodeReads uint64
+	// MaxTemporaryBytes bounds the maximum nodeCount*56 decoded-node footprint
+	// before allocation. This accounting excludes input bytes, traversal stack
+	// and runtime overhead; it is not a bound on total live heap memory.
 	MaxTemporaryBytes uint64
 }
 
@@ -63,7 +77,8 @@ func (limits SnapshotPersistenceLimits) validate() error {
 
 // MarshalBinary returns the version-1 canonical persisted-snapshot encoding.
 // It includes retained node digests and byte-accounting metadata, never raw
-// leaf bytes.
+// leaf bytes. The result owns its bytes. This operation has no caller-supplied
+// size budget or cancellation context; structural validation visits every node.
 func (snapshot Snapshot) MarshalBinary() ([]byte, error) {
 	if err := snapshot.validate(); err != nil {
 		return nil, err
@@ -114,7 +129,10 @@ func (snapshot Snapshot) MarshalBinary() ([]byte, error) {
 
 // ParseSnapshot decodes and validates one complete version-1 persisted
 // snapshot. Successful results own their retained nodes and are safe for
-// concurrent read-only use.
+// concurrent read-only use. Structure and internal hashes are checked, but
+// neither the root's authority nor cumulative raw-byte accounting is established.
+// Authenticate the root separately and use trusted accounting for ResumeBuilder.
+// data must not be modified concurrently with parsing.
 func ParseSnapshot(
 	ctx context.Context,
 	data []byte,
@@ -269,7 +287,10 @@ func ParseSnapshot(
 // ResumeBuilder creates an independent mutable builder from a validated
 // snapshot. expectedTotalLeafBytes must come from caller-trusted state because
 // the selected Merkle profile does not commit raw leaf lengths. Old raw leaf
-// bytes are not recovered or retained.
+// bytes are not recovered or retained. Authenticate snapshot.Root() separately;
+// expectedTotalLeafBytes must not be read from the same untrusted snapshot.
+// Old individual leaf lengths cannot be checked against MaxLeafBytes; that
+// construction limit applies to subsequent appends.
 func ResumeBuilder(
 	ctx context.Context,
 	snapshot Snapshot,
@@ -449,6 +470,8 @@ func validateSnapshotStructure(
 
 			continue
 		}
+		// Canonical contiguous postorder ranges establish exclusive ownership of
+		// child nodes without an attacker-sized visited-node map.
 		leftSize := largestPowerOfTwoBelow(node.size)
 		rightSize := node.size - leftSize
 		rightNodes := snapshotNodeCount(rightSize)

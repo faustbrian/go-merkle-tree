@@ -242,6 +242,8 @@ func equalDigestSlices(left, right []merkletree.Digest) bool {
 	return true
 }
 
+// independentMultiFrontier hashes unselected raw-leaf subtrees recursively,
+// independently of the snapshot graph used by production generation.
 func independentMultiFrontier(
 	leaves []merkletree.RawLeaf,
 	indexes []uint64,

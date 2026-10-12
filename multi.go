@@ -18,10 +18,19 @@ const (
 // proof generation and verification. Every field must be nonzero. Values are
 // copied and remain immutable during an operation.
 type MultiProofLimits struct {
-	MaxLeaves         uint64
-	MaxElements       uint64
+	// MaxLeaves bounds the maximum selected index count, not the entire tree
+	// size.
+	MaxLeaves uint64
+	// MaxElements bounds the maximum unselected-subtree frontier digest count.
+	MaxElements uint64
+	// MaxTraversalDepth bounds the maximum bits.Len64(treeSize), checked before
+	// traversal.
 	MaxTraversalDepth uint64
-	MaxLeafBytes      uint64
+	// MaxLeafBytes bounds the maximum individual raw leaf length during
+	// verification only.
+	MaxLeafBytes uint64
+	// MaxTotalLeafBytes bounds the maximum sum of selected raw leaf lengths
+	// during verification only.
 	MaxTotalLeafBytes uint64
 }
 
@@ -253,7 +262,9 @@ func (snapshot Snapshot) appendMultiProof(
 // VerifyMultiInclusion independently verifies raw leaves, proof identity, and
 // the canonical multi-proof frontier. leaves must correspond to LeafIndexes
 // order. Structural defects return ErrMalformedProof; authentication failures
-// return ErrVerificationFailed.
+// return ErrVerificationFailed. Callers must separately authenticate
+// proof.Root()'s complete identity and compare proof.LeafIndexes() with the
+// requested set; the verifier uses proof's bound root, not a trust source.
 func VerifyMultiInclusion(
 	ctx context.Context,
 	proof MultiInclusionProof,

@@ -10,7 +10,8 @@ import (
 // sufficient nodes for snapshots and proofs. A Builder owns its mutations and
 // is not safe for concurrent use. Snapshot values returned by Builder are
 // immutable and remain safe for concurrent read-only use after later appends.
-// The zero value fails with ErrInvalidBuilder.
+// Do not copy an initialized Builder for independent mutation: copies share
+// internal slice storage. The zero value fails with ErrInvalidBuilder.
 type Builder struct {
 	initialized bool
 	profile     Profile
@@ -39,13 +40,16 @@ func NewBuilder(profile Profile, limits SnapshotLimits) (*Builder, error) {
 }
 
 // Append atomically appends one raw leaf. On cancellation, invalid input, or a
-// resource-limit failure, the builder remains unchanged.
+// resource-limit error, the builder remains unchanged. Cancellation must be
+// observed at a checkpoint; it cannot preempt hashing or final publication.
 func (builder *Builder) Append(ctx context.Context, leaf RawLeaf) error {
 	return builder.AppendBatch(ctx, []RawLeaf{leaf})
 }
 
 // AppendBatch atomically appends ordered raw leaves. It validates the complete
-// batch before modifying builder state. An empty batch is a successful no-op.
+// batch before modifying builder state. An empty batch is a successful no-op
+// only after validating the context and builder. The caller must not modify
+// the input slice concurrently.
 func (builder *Builder) AppendBatch(
 	ctx context.Context,
 	leaves []RawLeaf,
@@ -150,6 +154,8 @@ func (builder *Builder) AppendBatch(
 		}
 	}
 
+	// Keep the existing frontier untouched until all fallible work has succeeded;
+	// a returned error must not leave a partially admitted batch.
 	builder.nodes = append(builder.nodes, newNodes...)
 	builder.frontier = frontier
 	builder.treeSize = treeSize

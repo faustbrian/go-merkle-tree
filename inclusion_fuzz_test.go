@@ -6,6 +6,9 @@ import (
 	"testing"
 )
 
+// FuzzVerifyInclusion mutates a cloned four-leaf proof and its raw leaf.
+// It checks panic safety and the expected malformed/authentication error classes;
+// unchanged mutations may still verify.
 func FuzzVerifyInclusion(f *testing.F) {
 	f.Add([]byte{})
 	f.Add([]byte{0})

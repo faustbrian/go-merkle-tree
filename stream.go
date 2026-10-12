@@ -10,7 +10,8 @@ import (
 // logarithmic frontier of completed subtrees. It cannot generate proofs.
 // RootBuilder owns its mutations, is not safe for concurrent use, and leaves
 // synchronization to the caller. The zero value fails with
-// ErrInvalidRootBuilder.
+// ErrInvalidRootBuilder. Do not copy an initialized RootBuilder for independent
+// mutation: copies share internal frontier storage.
 type RootBuilder struct {
 	initialized bool
 	profile     Profile
@@ -40,8 +41,9 @@ func NewRootBuilder(
 	}, nil
 }
 
-// Append atomically appends one raw leaf. On cancellation or failure the
-// builder remains unchanged.
+// Append atomically appends one raw leaf. A returned error leaves the builder
+// unchanged; cancellation must be observed at a checkpoint.
+// Cancellation does not preempt an individual hash or final publication.
 func (builder *RootBuilder) Append(
 	ctx context.Context,
 	leaf RawLeaf,
@@ -50,7 +52,9 @@ func (builder *RootBuilder) Append(
 }
 
 // AppendBatch atomically appends ordered raw leaves without retaining leaf
-// bytes or the full node tree. An empty batch is a successful no-op.
+// bytes or the full node tree. An empty batch is a successful no-op only after
+// validating the context and builder. The caller must not modify the input
+// slice concurrently.
 func (builder *RootBuilder) AppendBatch(
 	ctx context.Context,
 	leaves []RawLeaf,
@@ -123,6 +127,8 @@ func (builder *RootBuilder) AppendBatch(
 		}
 	}
 
+	// Publish only the fully computed frontier; an earlier error leaves all
+	// cumulative accounting and committed subtrees unchanged.
 	builder.frontier = frontier
 	builder.treeSize = treeSize
 	builder.totalBytes = totalBytes

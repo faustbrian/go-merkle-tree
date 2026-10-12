@@ -5,6 +5,9 @@ import (
 	"testing"
 )
 
+// FuzzVerifyMultiInclusion mutates an eight-leaf proof selecting indexes 1 and 6.
+// The oracle is panic safety across metadata, frontier and raw-leaf mutations,
+// not rejection of every mutation.
 func FuzzVerifyMultiInclusion(f *testing.F) {
 	snapshot, leaves := fuzzMultiSnapshot(f)
 	base, err := snapshot.MultiInclusionProof(

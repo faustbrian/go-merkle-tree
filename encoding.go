@@ -20,6 +20,8 @@ var canonicalEncodingMagic = [4]byte{'M', 'T', 'R', 'E'}
 // EncodingLimits bounds bytes consumed by canonical binary decoders. MaxBytes
 // must be nonzero. Values are copied and remain immutable during an operation.
 type EncodingLimits struct {
+	// MaxBytes bounds the maximum length of the complete input frame, including
+	// its header.
 	MaxBytes uint64
 }
 
@@ -57,6 +59,8 @@ func (root Root) MarshalBinary() ([]byte, error) {
 
 // ParseRoot decodes one complete version-1 canonical binary root. It rejects
 // non-canonical, truncated, trailing, unsupported, or oversized input.
+// A nonempty digest is opaque: parsing does not rebuild a tree or authenticate
+// the root's source. The result does not alias data.
 func ParseRoot(data []byte, limits EncodingLimits) (Root, error) {
 	if err := limits.validate(); err != nil {
 		return Root{}, err

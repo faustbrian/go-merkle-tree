@@ -17,6 +17,11 @@ import (
 
 var comparisonRootSink []byte
 
+// BenchmarkNativeConstruction excludes reusable input preparation and measures
+// native tree construction plus extraction into a result sink for 256/16384
+// 32-byte leaves. Peers differ in domain separation, shape and retained state;
+// only the transparency-dev track shares the RFC hashing convention. These are
+// native-workload comparisons, not equivalent security or ownership contracts.
 func BenchmarkNativeConstruction(b *testing.B) {
 	for _, size := range []int{256, 16_384} {
 		raw, owned, cbergoonContent, txatyBlocks := comparisonLeaves(size)

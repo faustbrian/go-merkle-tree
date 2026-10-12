@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+### Documentation
+
+- Clarify proof-embedded root authentication, cooperative cancellation,
+  builder-copy ownership, and the exact accounting scope of resource limits.
+  Snapshot parsing validates structure but does not establish root authority
+  or trusted raw-byte accounting; resume cannot recheck old leaf lengths.
+
 ## 1.1.1 - 2026-10-07
 
 ### Changed

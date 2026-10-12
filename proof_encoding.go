@@ -59,6 +59,8 @@ func (proof InclusionProof) MarshalBinary() ([]byte, error) {
 
 // ParseInclusionProof decodes one complete version-1 canonical inclusion
 // proof. It validates canonical structure without authenticating a raw leaf.
+// The result does not alias data. MaxLeafBytes is enforced by VerifyInclusion,
+// not by this decoder, which has no raw leaf bytes.
 func ParseInclusionProof(
 	ctx context.Context,
 	data []byte,
@@ -184,6 +186,8 @@ func (proof ConsistencyProof) MarshalBinary() ([]byte, error) {
 
 // ParseConsistencyProof decodes one complete version-1 canonical consistency
 // proof. It validates canonical structure without authenticating both roots.
+// The result does not alias data; callers still authenticate its root identities
+// and use VerifyConsistency to check their append-only relationship.
 func ParseConsistencyProof(
 	ctx context.Context,
 	data []byte,
@@ -322,7 +326,9 @@ func (proof MultiInclusionProof) MarshalBinary() ([]byte, error) {
 
 // ParseMultiInclusionProof decodes one complete version-1 canonical
 // multi-inclusion proof. It validates canonical structure without
-// authenticating caller-supplied raw leaves.
+// authenticating caller-supplied raw leaves. The result does not alias data.
+// MaxLeafBytes and MaxTotalLeafBytes apply to VerifyMultiInclusion, not to
+// decoding stored digests; all limit fields must still be nonzero.
 func ParseMultiInclusionProof(
 	ctx context.Context,
 	data []byte,

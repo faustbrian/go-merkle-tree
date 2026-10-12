@@ -8,6 +8,8 @@ import (
 	merkletree "github.com/faustbrian/go-merkle-tree"
 )
 
+// BenchmarkComputeRoot measures one-shot roots for 1/256/16384 pre-owned 32-byte
+// leaves; input construction is outside each timed sub-benchmark.
 func BenchmarkComputeRoot(b *testing.B) {
 	for _, size := range []int{1, 256, 16_384} {
 		leaves := make([]merkletree.RawLeaf, size)
@@ -36,6 +38,8 @@ func BenchmarkComputeRoot(b *testing.B) {
 	}
 }
 
+// BenchmarkInclusionProof times path generation at index 8192 of 16384 leaves.
+// Snapshot/input construction precedes ResetTimer.
 func BenchmarkInclusionProof(b *testing.B) {
 	leaves := benchmarkLeaves(16_384)
 	snapshot, err := merkletree.NewSnapshot(
@@ -61,6 +65,8 @@ func BenchmarkInclusionProof(b *testing.B) {
 	}
 }
 
+// BenchmarkVerifyInclusion times verification with a prebuilt 16384-leaf proof and
+// raw leaf at index 8192; proof construction is excluded.
 func BenchmarkVerifyInclusion(b *testing.B) {
 	leaves := benchmarkLeaves(16_384)
 	snapshot, err := merkletree.NewSnapshot(
@@ -95,6 +101,9 @@ func BenchmarkVerifyInclusion(b *testing.B) {
 	}
 }
 
+// BenchmarkBuilderAppend times one 32-byte append into the same growing builder.
+// Setup is excluded; node/leaf capacities depend on b.N, while the default
+// total-byte ceiling remains in force. This is not fixed-size append latency.
 func BenchmarkBuilderAppend(b *testing.B) {
 	leaf := merkletree.NewRawLeaf(make([]byte, 32))
 	limits := merkletree.DefaultSnapshotLimits()
@@ -118,6 +127,9 @@ func BenchmarkBuilderAppend(b *testing.B) {
 	}
 }
 
+// BenchmarkBuilderAppendBatch times repeated 256-leaf batches of 32-byte leaves
+// into one growing builder. Setup is excluded and capacities depend on b.N;
+// the default total-byte ceiling still bounds calibration.
 func BenchmarkBuilderAppendBatch(b *testing.B) {
 	leaves := benchmarkLeaves(256)
 	limits := merkletree.DefaultSnapshotLimits()
@@ -144,6 +156,8 @@ func BenchmarkBuilderAppendBatch(b *testing.B) {
 	}
 }
 
+// BenchmarkRootBuilderAppend times a 32-byte append into one growing streaming
+// frontier, excluding setup; b.N determines leaf capacity, not the byte limit.
 func BenchmarkRootBuilderAppend(b *testing.B) {
 	leaf := merkletree.NewRawLeaf(make([]byte, 32))
 	limits := merkletree.DefaultLimits()
@@ -166,6 +180,8 @@ func BenchmarkRootBuilderAppend(b *testing.B) {
 	}
 }
 
+// BenchmarkRootBuilderAppendBatch times 256-leaf/32-byte batches into one growing
+// streaming frontier. Setup is excluded; the default total-byte ceiling remains.
 func BenchmarkRootBuilderAppendBatch(b *testing.B) {
 	leaves := benchmarkLeaves(256)
 	limits := merkletree.DefaultLimits()
@@ -191,6 +207,8 @@ func BenchmarkRootBuilderAppendBatch(b *testing.B) {
 	}
 }
 
+// BenchmarkRootBuilderRoot times folding a prebuilt 16383-leaf frontier.
+// Leaf ingestion is excluded; the non-power-of-two size exercises final merges.
 func BenchmarkRootBuilderRoot(b *testing.B) {
 	leaves := benchmarkLeaves(16_383)
 	builder, err := merkletree.NewRootBuilder(
@@ -216,6 +234,8 @@ func BenchmarkRootBuilderRoot(b *testing.B) {
 	}
 }
 
+// BenchmarkConsistencyProof times path generation for an 8191-to-16384 prefix.
+// Both snapshots and the older root are constructed before ResetTimer.
 func BenchmarkConsistencyProof(b *testing.B) {
 	leaves := benchmarkLeaves(16_384)
 	older, newer := benchmarkConsistencySnapshots(b, leaves, 8_191)
@@ -237,6 +257,8 @@ func BenchmarkConsistencyProof(b *testing.B) {
 	}
 }
 
+// BenchmarkVerifyConsistency times verification of a prebuilt 8191-to-16384 proof,
+// excluding snapshot and proof construction.
 func BenchmarkVerifyConsistency(b *testing.B) {
 	leaves := benchmarkLeaves(16_384)
 	older, newer := benchmarkConsistencySnapshots(b, leaves, 8_191)
@@ -266,6 +288,8 @@ func BenchmarkVerifyConsistency(b *testing.B) {
 	}
 }
 
+// BenchmarkMultiInclusionProof times frontier generation for 256 evenly spaced
+// indexes (stride 64) in 16384 leaves; input and snapshot setup are excluded.
 func BenchmarkMultiInclusionProof(b *testing.B) {
 	leaves := benchmarkLeaves(16_384)
 	snapshot, err := merkletree.NewSnapshot(
@@ -292,6 +316,8 @@ func BenchmarkMultiInclusionProof(b *testing.B) {
 	}
 }
 
+// BenchmarkVerifyMultiInclusion times a prebuilt 256-selected-leaf proof in a
+// 16384-leaf tree; leaf selection and proof generation precede ResetTimer.
 func BenchmarkVerifyMultiInclusion(b *testing.B) {
 	leaves := benchmarkLeaves(16_384)
 	snapshot, err := merkletree.NewSnapshot(
@@ -331,6 +357,9 @@ func BenchmarkVerifyMultiInclusion(b *testing.B) {
 	}
 }
 
+// BenchmarkInclusionProofEncoding separates marshal, parse and truncated-frame
+// rejection of a prebuilt 16384-leaf/index-8192 proof. Rates use encoded bytes;
+// parsing does not include cryptographic verification.
 func BenchmarkInclusionProofEncoding(b *testing.B) {
 	leaves := benchmarkLeaves(16_384)
 	snapshot, err := merkletree.NewSnapshot(
@@ -395,6 +424,9 @@ func BenchmarkInclusionProofEncoding(b *testing.B) {
 	})
 }
 
+// BenchmarkSnapshotPersistence separates full marshal, parse and builder resume
+// of a prebuilt 16384-leaf snapshot. Setup is outside timed sub-benchmarks;
+// marshal/parse rates use encoded bytes, not raw-leaf throughput.
 func BenchmarkSnapshotPersistence(b *testing.B) {
 	leaves := benchmarkLeaves(16_384)
 	snapshot, err := merkletree.NewSnapshot(

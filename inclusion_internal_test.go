@@ -414,6 +414,8 @@ func cloneInclusionProof(proof InclusionProof) InclusionProof {
 	return proof
 }
 
+// checkpointContext cancels after a chosen number of Err calls. It exercises
+// deterministic checkpoints, not goroutine timing or deadline responsiveness.
 type checkpointContext struct {
 	remaining int
 	done      chan struct{}

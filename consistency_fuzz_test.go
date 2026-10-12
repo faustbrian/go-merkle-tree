@@ -5,6 +5,8 @@ import (
 	"testing"
 )
 
+// FuzzVerifyConsistency mutates identity, sizes and path nodes of a 3-to-7
+// proof. The oracle is panic safety, not rejection of every mutated proof.
 func FuzzVerifyConsistency(f *testing.F) {
 	leaves := make([]RawLeaf, 7)
 	for index := range leaves {

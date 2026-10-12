@@ -349,6 +349,8 @@ func consistencyLeaves(size int) []merkletree.RawLeaf {
 	return leaves
 }
 
+// independentConsistencyPath builds RFC SUBPROOF nodes directly from source
+// leaves, not from production snapshot nodes or their traversal.
 func independentConsistencyPath(
 	leaves []merkletree.RawLeaf,
 	olderSize int,

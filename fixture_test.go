@@ -13,6 +13,8 @@ import (
 	merkletree "github.com/faustbrian/go-merkle-tree"
 )
 
+// The checksum binds exact generated corpus bytes, not just its self-reported
+// peer revision. Regeneration and checksum changes are reviewed together.
 const rfc9162FixtureChecksum = "1ee115281c3a1861ef9e92e126e1f2bf7e043bc0ce4ada8b83a9d54d4ab885c7"
 
 type rfc9162Fixture struct {

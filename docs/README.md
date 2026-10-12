@@ -30,6 +30,7 @@ supported public contract.
 
 ## Reference and maintenance
 
+- [Source documentation audit](source-documentation-audit.md)
 - [Benchmarks](benchmarks.md)
 - [Profile compatibility](compatibility.md)
 - [Compatibility policy](../COMPATIBILITY.md)

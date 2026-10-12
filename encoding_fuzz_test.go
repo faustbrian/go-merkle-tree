@@ -8,6 +8,9 @@ import (
 	merkletree "github.com/faustbrian/go-merkle-tree"
 )
 
+// FuzzParseRoot feeds at most 1 MiB of arbitrary bytes to the decoder.
+// A successful parse must re-encode byte-for-byte; this is a canonical framing
+// oracle, not proof verification or authentication of the embedded root.
 func FuzzParseRoot(f *testing.F) {
 	f.Add(canonicalRootFixture(f))
 	f.Add([]byte("not a root"))
@@ -33,6 +36,9 @@ func FuzzParseRoot(f *testing.F) {
 	})
 }
 
+// FuzzParseInclusionProof feeds at most 1 MiB of arbitrary bytes to the decoder.
+// A successful parse must re-encode byte-for-byte; this is a canonical framing
+// oracle, not proof verification or authentication of the embedded root.
 func FuzzParseInclusionProof(f *testing.F) {
 	fixtures := encodedProofFixtures(f)
 	f.Add(fixtures[0].data)
@@ -52,6 +58,9 @@ func FuzzParseInclusionProof(f *testing.F) {
 	})
 }
 
+// FuzzParseConsistencyProof feeds at most 1 MiB of arbitrary bytes to the decoder.
+// A successful parse must re-encode byte-for-byte; this is a canonical framing
+// oracle, not proof verification or authentication of the embedded root.
 func FuzzParseConsistencyProof(f *testing.F) {
 	fixtures := encodedProofFixtures(f)
 	f.Add(fixtures[1].data)
@@ -71,6 +80,9 @@ func FuzzParseConsistencyProof(f *testing.F) {
 	})
 }
 
+// FuzzParseMultiInclusionProof feeds at most 1 MiB of arbitrary bytes to the decoder.
+// A successful parse must re-encode byte-for-byte; this is a canonical framing
+// oracle, not proof verification or authentication of the embedded root.
 func FuzzParseMultiInclusionProof(f *testing.F) {
 	fixtures := encodedProofFixtures(f)
 	f.Add(fixtures[2].data)
@@ -90,6 +102,9 @@ func FuzzParseMultiInclusionProof(f *testing.F) {
 	})
 }
 
+// FuzzParseSnapshot feeds at most 1 MiB of arbitrary bytes to the decoder.
+// A successful parse must re-encode byte-for-byte; this is a canonical framing
+// oracle, not proof verification or authentication of the embedded root.
 func FuzzParseSnapshot(f *testing.F) {
 	snapshot, err := merkletree.NewSnapshot(
 		context.Background(),

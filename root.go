@@ -15,8 +15,13 @@ const (
 // Limits bounds work and allocation derived from raw leaves. Every field must
 // be nonzero. Limits is copied by value and is immutable during an operation.
 type Limits struct {
-	MaxLeaves     uint64
-	MaxLeafBytes  uint64
+	// MaxLeaves bounds the maximum ordered leaf count, including empty leaves.
+	MaxLeaves uint64
+	// MaxLeafBytes bounds the maximum raw byte length of each leaf before
+	// hashing.
+	MaxLeafBytes uint64
+	// MaxTotalBytes bounds the maximum sum of raw leaf byte lengths, excluding
+	// hash prefixes.
 	MaxTotalBytes uint64
 }
 

@@ -16,7 +16,10 @@ const (
 // Every field must be nonzero. Values are copied and remain immutable during
 // an operation.
 type ConsistencyProofLimits struct {
-	MaxElements       uint64
+	// MaxElements bounds the maximum consistency-path digest count.
+	MaxElements uint64
+	// MaxTraversalDepth bounds the maximum bits.Len64(newerTreeSize), checked
+	// before traversal.
 	MaxTraversalDepth uint64
 }
 
@@ -244,6 +247,9 @@ func (snapshot Snapshot) appendConsistencySubproof(
 // VerifyConsistency independently verifies proof's append-only relationship.
 // It returns ErrMalformedProof for structural defects and
 // ErrVerificationFailed when well-formed nodes do not authenticate both roots.
+// Both roots come from proof. Callers must authenticate their complete
+// identities and expected sizes separately; success does not establish their
+// authority, freshness or publication history.
 func VerifyConsistency(
 	ctx context.Context,
 	proof ConsistencyProof,

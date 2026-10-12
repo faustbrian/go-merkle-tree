@@ -82,10 +82,11 @@ const (
 	// operation.
 	ResourceLeaves ResourceKind = iota + 1
 
-	// ResourceLeafBytes is the encoded byte length of one raw leaf.
+	// ResourceLeafBytes is the raw byte length of one leaf before hashing.
 	ResourceLeafBytes
 
-	// ResourceTotalBytes is the combined byte length of all raw leaves.
+	// ResourceTotalBytes is the combined raw leaf length, or its declared value
+	// when decoding a persisted snapshot.
 	ResourceTotalBytes
 
 	// ResourceProofElements is the number of sibling digests in a proof.
@@ -114,8 +115,12 @@ const (
 // contains leaf contents. ResourceError matches ErrResourceExhausted through
 // errors.Is and can be recovered with errors.As.
 type ResourceError struct {
-	Kind   ResourceKind
-	Limit  uint64
+	// Kind identifies the resource accounting category for this rejection.
+	Kind ResourceKind
+	// Limit reports the configured maximum for that category.
+	Limit uint64
+	// Actual reports the rejected count or byte size; overflow diagnostics
+	// saturate at MaxUint64.
 	Actual uint64
 }
 

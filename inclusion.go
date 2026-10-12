@@ -15,9 +15,15 @@ const defaultMaxRetainedNodes = uint64(1<<20 - 1)
 // nonzero. ProofLimits is copied by value and is immutable during an
 // operation.
 type ProofLimits struct {
-	MaxElements       uint64
+	// MaxElements bounds the maximum sibling digest count; raw leaves are not
+	// elements.
+	MaxElements uint64
+	// MaxTraversalDepth bounds the maximum bits.Len64(treeSize), checked before
+	// path traversal.
 	MaxTraversalDepth uint64
-	MaxLeafBytes      uint64
+	// MaxLeafBytes bounds the maximum raw leaf length during verification;
+	// generation has no raw leaf.
+	MaxLeafBytes uint64
 }
 
 // DefaultProofLimits permits at most 64 sibling elements and 64 traversal
@@ -43,7 +49,12 @@ func (limits ProofLimits) validate() error {
 // SnapshotLimits bounds both raw-leaf construction and the immutable node
 // tree retained for later proof generation. Every field must be valid.
 type SnapshotLimits struct {
-	Construction     Limits
+	// Construction specifies the raw-leaf count and byte bounds used during
+	// construction and append.
+	Construction Limits
+	// MaxRetainedNodes bounds the maximum full-tree node count (2*n-1 for n
+	// nonempty-tree leaves). It must also fit the native int range, even for an
+	// empty snapshot.
 	MaxRetainedNodes uint64
 }
 
@@ -423,6 +434,9 @@ func (proof InclusionProof) Siblings() []Digest {
 // VerifyInclusion independently verifies proof against leaf and its bound
 // root. It returns ErrMalformedProof for structural defects and
 // ErrVerificationFailed for a well-formed proof that does not authenticate.
+// The root is taken from proof, not from a separate trust source: callers must
+// authenticate proof.Root()'s complete identity and check proof.LeafIndex()
+// against the requested index before accepting success.
 func VerifyInclusion(
 	ctx context.Context,
 	proof InclusionProof,
@@ -589,6 +603,8 @@ func auditPathLength(index, size uint64) uint64 {
 	return length
 }
 
+// largestPowerOfTwoBelow requires value > 1, as guaranteed by traversal base
+// cases. This split preserves the RFC shape without padding or duplicate leaves.
 func largestPowerOfTwoBelow(value uint64) uint64 {
 	return uint64(1) << (bits.Len64(value-1) - 1)
 }
@@ -600,6 +616,8 @@ func newDigest(
 	return Digest{algorithm: algorithm, value: value}
 }
 
+// snapshotNodeCount uses unsigned arithmetic; callers admitting persisted sizes
+// must first use validSnapshotNodeCount to reject unrepresentable full trees.
 func snapshotNodeCount(treeSize uint64) uint64 {
 	if treeSize == 0 {
 		return 0

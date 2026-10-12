@@ -7,6 +7,9 @@ import (
 	merkletree "github.com/faustbrian/go-merkle-tree"
 )
 
+// FuzzComputeRoot caps input at 4096 bytes and derives up to 32 ordered leaves.
+// Its oracles are repeat determinism, version-1 profile digest parity and size,
+// not an independent cryptographic implementation.
 func FuzzComputeRoot(f *testing.F) {
 	f.Add([]byte{})
 	f.Add([]byte{0})
