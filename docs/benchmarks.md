@@ -1,5 +1,7 @@
 # Benchmark methodology
 
+[Documentation index](README.md)
+
 ## Owned benchmarks
 
 `benchmark_test.go` measures tiny, medium, and large root construction;
@@ -79,3 +81,5 @@ benchmark process peaked at 120,733,696 resident bytes; this is not attributable
 to an individual implementation.
 
 See [raw benchmark evidence](benchmarks/raw/2026-07-29-darwin-arm64.tsv).
+
+Continue with [Adoption and migration guide](adoption.md).

@@ -1,5 +1,7 @@
 # Documentation
 
+[Package README](../README.md)
+
 `merkle-tree` is stable at v1, requires Go 1.27.0, and exposes one public
 package whose default import identifier is `merkletree`. Its implementation is
 portable Go with no platform-specific source files or required external
@@ -41,3 +43,8 @@ supported public contract.
 - [Contribution guide](../CONTRIBUTING.md)
 - [Release history](../CHANGELOG.md)
 - [License](../LICENSE)
+
+## Ecosystem navigation
+
+See the [versioned Golib ecosystem index](https://github.com/faustbrian/go-library-tools/blob/v1.8.4/docs/ecosystem/README.md) for package
+selection, explicit ownership, and compatibility guidance.

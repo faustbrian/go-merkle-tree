@@ -1,5 +1,7 @@
 # Source documentation audit
 
+[Documentation index](README.md)
+
 ## Scope and reproduction
 
 Documentation-only audit of base `be75eb5515846dbc710cbd95f1675aa8e6395a49`.
@@ -186,3 +188,5 @@ the existing local check/CI routes and Required aggregation. Release and
 selected security/assurance routes retain their existing controls. This
 structural status supplements the rendered semantic audit; it does not
 certify prose meaning, generator execution or runtime conformance.
+
+Continue with [Adoption and migration guide](adoption.md).

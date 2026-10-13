@@ -1,5 +1,7 @@
 # Detailed reference
 
+[Documentation index](README.md)
+
 This document contains the detailed package contracts and operational notes.
 Start with the root README and documentation index.
 

@@ -1,5 +1,7 @@
 # Adoption and migration guide
 
+[Documentation index](README.md)
+
 ## Choose a profile first
 
 Use `CanonicalProfile()` for a package-owned application protocol when both

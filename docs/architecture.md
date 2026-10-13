@@ -1,5 +1,7 @@
 # Profile and ownership semantics
 
+[Documentation index](README.md)
+
 ## Root identity
 
 A root is the tuple:
@@ -142,3 +144,5 @@ inputs.
 Security depends on SHA-256 collision and second-preimage resistance and on
 the caller authenticating the entire root identity. Domain separation prevents
 a raw leaf encoding from being interpreted as an internal branch encoding.
+
+Continue with [Adoption and migration guide](adoption.md).

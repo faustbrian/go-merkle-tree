@@ -1,5 +1,7 @@
 # Merkle structure selection
 
+[Documentation index](README.md)
+
 These structures share hashing terminology but are not interchangeable.
 
 | Structure | Addressing and shape | Typical proof | This package |
@@ -24,3 +26,5 @@ membership/non-membership proof contract. Verkle trees require a selected
 vector-commitment scheme and opening-proof transcript. Those belong in
 separately specified packages or profiles with their own fixtures and
 differential evidence.
+
+Continue with [Adoption and migration guide](adoption.md).

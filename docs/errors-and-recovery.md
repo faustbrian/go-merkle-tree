@@ -1,5 +1,7 @@
 # Errors and recovery
 
+[Documentation index](README.md)
+
 Public sentinel errors support `errors.Is`. `ResourceError` supports
 `errors.As` and exposes only resource kind, limit, and actual count.
 
@@ -34,3 +36,5 @@ An interrupted write must leave the previously published snapshot readable.
 The package intentionally does not prescribe filesystem rename, database
 transaction, object-store generation, or compare-and-swap mechanics; the
 adapter must provide that contract.
+
+Continue with [Adoption and migration guide](adoption.md).

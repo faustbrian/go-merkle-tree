@@ -1,5 +1,7 @@
 # Compatibility
 
+[Documentation index](README.md)
+
 The [specification decision register](specification-decisions.md) records the
 normative rationale, alternatives, consequences, and executable evidence for
 this compatibility boundary.

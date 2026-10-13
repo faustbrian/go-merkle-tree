@@ -1,5 +1,7 @@
 # Merkle-tree specification decisions
 
+[Documentation index](README.md)
+
 This register is the human-readable view of
 [`specification/decisions.json`](../specification/decisions.json). RFC 9162
 is authoritative only for the identified Merkle tree operations; package
@@ -342,3 +344,5 @@ No known material RFC 9162 interpretation or package wire decision is
 unresolved at this revision. New ambiguities remain unresolved until assigned
 a stable identifier, authority analysis, executable evidence, and maintainer
 disposition in both machine and human registers.
+
+Continue with [Adoption and migration guide](adoption.md).

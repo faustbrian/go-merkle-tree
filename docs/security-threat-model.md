@@ -1,5 +1,7 @@
 # Security threat model: go-merkle-tree
 
+[Documentation index](README.md)
+
 **Model version:** 1.0 (2026-09-30).
 
 **Source baseline:** `bca41287d7c0ffb07d992b1e241aaab85dbc9539` on `main`.

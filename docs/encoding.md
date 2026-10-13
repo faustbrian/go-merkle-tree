@@ -1,5 +1,7 @@
 # Canonical binary encoding
 
+[Documentation index](README.md)
+
 Version 1 is a package-owned persistence and interchange format for complete
 root and proof identities. It is not a Certificate Transparency protocol wire
 format. Every integer is unsigned and big-endian. Digests are exactly 32
@@ -132,3 +134,5 @@ Successful decoders copy all object state. Mutating the input after a parse
 cannot mutate the returned root or proof. Authentication remains a separate
 step: parsing a proof does not verify caller-supplied raw leaves or establish
 that either committed root is trusted.
+
+Continue with [Adoption and migration guide](adoption.md).
