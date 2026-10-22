@@ -9,6 +9,12 @@
   Snapshot parsing validates structure but does not establish root authority
   or trusted raw-byte accounting; resume cannot recheck old leaf lengths.
 
+## 1.1.2 - 2026-10-22
+
+### Changed
+
+- Publish the current source and documentation with a fresh immutable tag.
+
 ## 1.1.1 - 2026-10-07
 
 ### Changed
